@@ -19,6 +19,7 @@ input(io::IO)
 max_heapify(arr::Vector{Int64}, index::Int64, depth::Int64)
 max_heap_insert(arr::Vector{Int64},k::Int64)
 heap_extract_max(arr::Vector{Int64})
-heap_max(arr::Int64)
+heap_max(arr::Vector{Int64})
+is_valid_max_heap(arr::Vector{Int64})
 build_max_heap(arr::Vector{Int64})
 ```

@@ -33,7 +33,7 @@ end
 """
 	height(i::Int64)::Int64
 -----
-get the height of current obj on the heap
+Get the height of current obj on the heap
 """
 @inline height(i::Int64) = begin
 	i !=0 ? convert(Int64, ceil(log(i)))+1 : 0
@@ -41,7 +41,7 @@ end
 
 """
 	swap(arr::Vector{Int64}, i::Int64, j::Int64)
-swap values of two elements in an array
+Swap values of two elements in an array
 """
 @inline swap(arr::Vector{Int64}, i::Int64, j::Int64) = begin
 	arr[convert_index(i)], arr[convert_index(j)] = arr[convert_index(j)], arr[convert_index(i)]
@@ -49,9 +49,9 @@ end
 
 
 """
-	convert_index(i::Int64)
+	convert_index(i::Int64)::Int64
 -----
-convert python index to julia index
+Convert python index to julia index
 """
 @inline convert_index(i::Int64) = begin
 	i+1
@@ -61,7 +61,7 @@ end
 """
 	parent(i::Int64, h::Int64)
 -----
-return the parent of current obj on the heap
+Return the parent of current indexing object on the heap
 """
 @inline parent(i::Int64, h::Int64) = begin
 	t = i - 2^(h)
@@ -70,9 +70,8 @@ end
 
 """
 	input(io::IO)::Vector{Int64}
-
 ------
-convert an io input into a vector
+Convert an io input into a vector
 """
 function input(io::IO)::Vector{Int64}
 	input = readline(io) 
@@ -87,27 +86,27 @@ Return (and delete) the maximum item of a Heap in
 ``O(lg(n))`` time
 """
 function heap_extract_max(arr::Vector{Int64})
-	popat!(x, getindex(x, maximum(x)))
+	popat!(arr, getindex(arr, maximum(arr)))
 end
 
 """
-	heap_max(arr::Int64)
+	heap_max(arr::Vector{Int64})
 ------
-Returns the max element of a Heap - Θ(1) time.
+Returns the max element of a Heap - ``\theta(1)`` time.
 """
-function heap_max(arr::Int64)
+function heap_max(arr::Vector{Int64})
 	return max(arr)
 end
 
 
 """
-	max_heapify(arr::Vector{Int64}, index::Int64, depth::Int64)
+	max_heapify(arr::Vector{Int64}, index::Int64, depth::Int64)::Vector{Int64}
 ------
 Runs in ``O(lg(n))`` time and is used to maintain the (max) Heap
 property whenever some node/index i has violated the heap rule
 (but left subtree, right subtree are each Max Heaps)
 """
-function max_heapify(arr::Vector{Int64}, index::Int64, depth::Int64)
+function max_heapify(arr::Vector{Int64}, index::Int64, depth::Int64)::Vector{Int64}
 	h = height(index)
 	if h == depth
 		# if leaf we stop
@@ -138,14 +137,14 @@ function max_heapify(arr::Vector{Int64}, index::Int64, depth::Int64)
 end
 
 """
-	max_heap_insert(arr::Vector{Int64},k::Int64)
+	max_heap_insert(arr::Vector{Int64},k::Int64)::Vector{Int64}
 -----
 an insert a new item (and maintain the heap property) 
 in ``O(lg(n))`` time. 
 
 Same for Heap-Increase-Key
 """
-function max_heap_insert(arr::Vector{Int64},k::Int64)
+function max_heap_insert(arr::Vector{Int64},k::Int64)::Vector{Int64}
 
 	j = length(arr)	
 	push!(arr, k)
@@ -165,12 +164,13 @@ function max_heap_insert(arr::Vector{Int64},k::Int64)
 	return arr
 end
 
+
 """
-	is_valid_max_heap(arr::Vector{Int64})
+	is_valid_max_heap(arr::Vector{Int64})::Bool
 -----
-Check whether an array is a heap
+Check whether an array is a valid max heap
 """
-function is_valid_max_heap(arr::Vector{Int64})
+function is_valid_max_heap(arr::Vector{Int64})::Bool
 	
 	for index in 0:length(arr)-1
 		h = height(index)
@@ -196,12 +196,12 @@ end
 
 
 """
-	build_max_heap(arr::Vector{Int64})
+	build_max_heap(arr::Vector{Int64})::Vector{Int64}
 -----
 Special one called Build-Max-Heap will run in O(n) time to
 build a Heap from scratch from an unordered input array.
 """
-function build_max_heap(arr::Vector{Int64})
+function build_max_heap(arr::Vector{Int64})::Vector{Int64}
 	size = length(arr)
 	h = height(arr[size])
 	for i in convert(Int64, floor(size/2)) - 1: -1: 0
