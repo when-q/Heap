@@ -20,7 +20,7 @@ Heap:
 Array: `[a,b,c,d,e,f,g,h]`
 
 To find the position of f:
-`index(i=2, j=2) \rightarrow  6`
+`index(i=2, j=2) → 6`
 """
 @inline indexing(i::Int64, j::Int64) = begin
 	# julia uses 1 indexing
